@@ -15,5 +15,20 @@
   <%= @restaurant.stars %>
 </p>
 
+<% if @restaurant.reviews.any? %>
+  <p>
+    <strong>Reviews:</strong>
+    <ul>
+      <% @restaurant.reviews.each do |review| %>
+        <li><%= review.content %> <%= link_to '🗑', review_path(review), method: :delete, data: { confirm: 'Delete review?' } %></li>
+      <% end %>
+    </ul>
+  </p>
+<% else %>
+  <p>Be the first to review...</p>
+<% end %>
+<%= link_to 'Add Review', new_restaurant_review_path(@restaurant), class: "btn btn-light" %>
+
+
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
 <%= link_to 'Back', restaurants_path %>
