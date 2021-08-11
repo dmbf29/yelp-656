@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
-  resources :restaurants
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  # verb '/path', to: 'controller#action', as: :prefix
+  # get '/restaurants/top', to: 'restaurants#top', as: :top_restaurants
+  resources :restaurants do
+    collection do
+      # verb '/path(and action)'
+      get :top
+    end
+    member do
+      get :chef
+    end
+  end
 end
